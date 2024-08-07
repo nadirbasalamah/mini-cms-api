@@ -7,6 +7,17 @@ import (
 )
 
 func SetupRoutes(e *echo.Echo) {
+	// category routes
+	categoryController := controllers.InitCategoryController()
+
+	categoryRoutes := e.Group("/api/v1")
+
+	categoryRoutes.GET("/categories", categoryController.GetAll)
+	categoryRoutes.GET("/categories/:id", categoryController.GetByID)
+	categoryRoutes.POST("/categories", categoryController.Create)
+	categoryRoutes.PUT("/categories/:id", categoryController.Update)
+	categoryRoutes.DELETE("/categories/:id", categoryController.Delete)
+
 	// content routes
 	contentController := controllers.InitContentController()
 

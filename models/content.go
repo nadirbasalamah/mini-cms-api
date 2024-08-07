@@ -13,4 +13,6 @@ type Content struct {
 	DeletedAt   gorm.DeletedAt `json:"deleted_at" gorm:"index"`
 	Title       string         `json:"title"`
 	Description string         `json:"description"`
+	CategoryID  uint           `json:"category_id"`
+	Category    Category       `json:"category"`
 }

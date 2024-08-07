@@ -35,6 +35,7 @@ func (cr *ContentRepositoryImpl) Create(contentReq models.ContentRequest) (model
 	var content models.Content = models.Content{
 		Title:       contentReq.Title,
 		Description: contentReq.Description,
+		CategoryID:  contentReq.CategoryID,
 	}
 
 	result := database.DB.Create(&content)
@@ -59,6 +60,7 @@ func (cr *ContentRepositoryImpl) Update(contentReq models.ContentRequest, id str
 
 	content.Title = contentReq.Title
 	content.Description = contentReq.Description
+	content.CategoryID = contentReq.CategoryID
 
 	if err := database.DB.Save(&content).Error; err != nil {
 		return models.Content{}, err
