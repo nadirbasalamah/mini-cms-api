@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"mini-cms-api/models"
+	"mini-cms-api/utils"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -12,11 +13,11 @@ import (
 var DB *gorm.DB
 
 var (
-	DB_USERNAME string = "root"
-	DB_PASSWORD string = ""
-	DB_NAME     string = "minicmsdb"
-	DB_HOST     string = "localhost"
-	DB_PORT     string = "3306"
+	DB_USERNAME string = utils.GetConfig("DB_USERNAME")
+	DB_PASSWORD string = utils.GetConfig("DB_PASSWORD")
+	DB_NAME     string = utils.GetConfig("DB_NAME")
+	DB_HOST     string = utils.GetConfig("DB_HOST")
+	DB_PORT     string = utils.GetConfig("DB_PORT")
 )
 
 func InitDB() {

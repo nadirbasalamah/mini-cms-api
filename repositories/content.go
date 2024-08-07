@@ -14,7 +14,7 @@ func InitContentRepository() ContentRepository {
 func (cr *ContentRepositoryImpl) GetAll() ([]models.Content, error) {
 	var contents []models.Content
 
-	if err := database.DB.Find(&contents).Error; err != nil {
+	if err := database.DB.Preload("Category").Find(&contents).Error; err != nil {
 		return []models.Content{}, err
 	}
 
@@ -24,7 +24,7 @@ func (cr *ContentRepositoryImpl) GetAll() ([]models.Content, error) {
 func (cr *ContentRepositoryImpl) GetByID(id string) (models.Content, error) {
 	var content models.Content
 
-	if err := database.DB.First(&content, "id = ?", id).Error; err != nil {
+	if err := database.DB.Preload("Category").First(&content, "id = ?", id).Error; err != nil {
 		return models.Content{}, err
 	}
 

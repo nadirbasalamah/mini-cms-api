@@ -64,6 +64,15 @@ func (cc *ContentController) Create(c echo.Context) error {
 		})
 	}
 
+	err := contentReq.Validate()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.Response[string]{
+			Status:  "failed",
+			Message: "please fill all the required fields",
+		})
+	}
+
 	content, err := cc.service.Create(contentReq)
 
 	if err != nil {
@@ -91,6 +100,15 @@ func (cc *ContentController) Update(c echo.Context) error {
 	}
 
 	contentID := c.Param("id")
+
+	err := contentReq.Validate()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.Response[string]{
+			Status:  "failed",
+			Message: "please fill all the required fields",
+		})
+	}
 
 	content, err := cc.service.Update(contentReq, contentID)
 

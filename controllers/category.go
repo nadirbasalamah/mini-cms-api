@@ -64,6 +64,15 @@ func (cc *CategoryController) Create(c echo.Context) error {
 		})
 	}
 
+	err := categoryRequest.Validate()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.Response[string]{
+			Status:  "failed",
+			Message: "please fill all the required fields",
+		})
+	}
+
 	category, err := cc.service.Create(categoryRequest)
 
 	if err != nil {
@@ -89,6 +98,15 @@ func (cc *CategoryController) Update(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, models.Response[string]{
 			Status:  "failed",
 			Message: "invalid request",
+		})
+	}
+
+	err := categoryRequest.Validate()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.Response[string]{
+			Status:  "failed",
+			Message: "please fill all the required fields",
 		})
 	}
 
