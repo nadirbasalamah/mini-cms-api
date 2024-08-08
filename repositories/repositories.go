@@ -17,3 +17,9 @@ type CategoryRepository interface {
 	Update(categoryReq models.CategoryRequest, id string) (models.Category, error)
 	Delete(id string) error
 }
+
+type UserRepository interface {
+	Register(registerReq models.RegisterRequest) (models.User, error)
+	GetByEmail(loginReq models.LoginRequest) (models.User, error)
+	GetUserInfo(id string) (models.User, error)
+}
