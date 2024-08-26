@@ -7,29 +7,29 @@ import (
 )
 
 type UserService struct {
-	repository repositories.UserRepository
-	jwtOptions models.JWTOptions
+	Repository repositories.UserRepository
+	JwtOptions models.JWTOptions
 }
 
 func InitUserService(jwtOptions models.JWTOptions) UserService {
 	return UserService{
-		repository: &repositories.UserRepositoryImpl{},
-		jwtOptions: jwtOptions,
+		Repository: &repositories.UserRepositoryImpl{},
+		JwtOptions: jwtOptions,
 	}
 }
 
 func (us *UserService) Register(registerReq models.RegisterRequest) (models.User, error) {
-	return us.repository.Register(registerReq)
+	return us.Repository.Register(registerReq)
 }
 
 func (us *UserService) Login(loginReq models.LoginRequest) (string, error) {
-	user, err := us.repository.GetByEmail(loginReq)
+	user, err := us.Repository.GetByEmail(loginReq)
 
 	if err != nil {
 		return "", err
 	}
 
-	token, err := utils.GenerateJWT(int(user.ID), us.jwtOptions)
+	token, err := utils.GenerateJWT(int(user.ID), us.JwtOptions)
 
 	if err != nil {
 		return "", err
@@ -39,5 +39,5 @@ func (us *UserService) Login(loginReq models.LoginRequest) (string, error) {
 }
 
 func (us *UserService) GetUserInfo(id string) (models.User, error) {
-	return us.repository.GetUserInfo(id)
+	return us.Repository.GetUserInfo(id)
 }

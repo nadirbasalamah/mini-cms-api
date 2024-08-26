@@ -6,31 +6,31 @@ import (
 )
 
 type ContentService struct {
-	repository repositories.ContentRepository
+	Repository repositories.ContentRepository
 }
 
 func InitContentService() ContentService {
 	return ContentService{
-		repository: &repositories.ContentRepositoryImpl{},
+		Repository: &repositories.ContentRepositoryImpl{},
 	}
 }
 
 func (cs *ContentService) GetAll() ([]models.Content, error) {
-	return cs.repository.GetAll()
+	return cs.Repository.GetAll()
 }
 
 func (cs *ContentService) GetByID(id string) (models.Content, error) {
-	return cs.repository.GetByID(id)
+	return cs.Repository.GetByID(id)
 }
 
 func (cs *ContentService) Create(contentReq models.ContentRequest) (models.Content, error) {
-	return cs.repository.Create(contentReq)
+	return cs.Repository.Create(contentReq)
 }
 
 func (cs *ContentService) Update(contentReq models.ContentRequest, id string) (models.Content, error) {
-	return cs.repository.Update(contentReq, id)
+	return cs.Repository.Update(contentReq, id)
 }
 
 func (cs *ContentService) Delete(id string) error {
-	return cs.repository.Delete(id)
+	return cs.Repository.Delete(id)
 }

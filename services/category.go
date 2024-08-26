@@ -6,31 +6,31 @@ import (
 )
 
 type CategoryService struct {
-	repository repositories.CategoryRepository
+	Repository repositories.CategoryRepository
 }
 
 func InitCategoryService() CategoryService {
 	return CategoryService{
-		repository: &repositories.CategoryRepositoryImpl{},
+		Repository: &repositories.CategoryRepositoryImpl{},
 	}
 }
 
 func (cs *CategoryService) GetAll() ([]models.Category, error) {
-	return cs.repository.GetAll()
+	return cs.Repository.GetAll()
 }
 
 func (cs *CategoryService) GetByID(id string) (models.Category, error) {
-	return cs.repository.GetByID(id)
+	return cs.Repository.GetByID(id)
 }
 
 func (cs *CategoryService) Create(categoryReq models.CategoryRequest) (models.Category, error) {
-	return cs.repository.Create(categoryReq)
+	return cs.Repository.Create(categoryReq)
 }
 
 func (cs *CategoryService) Update(categoryReq models.CategoryRequest, id string) (models.Category, error) {
-	return cs.repository.Update(categoryReq, id)
+	return cs.Repository.Update(categoryReq, id)
 }
 
 func (cs *CategoryService) Delete(id string) error {
-	return cs.repository.Delete(id)
+	return cs.Repository.Delete(id)
 }
