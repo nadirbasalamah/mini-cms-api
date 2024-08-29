@@ -11,7 +11,9 @@ type contentRepository struct {
 }
 
 func NewMySQLRepository(conn *gorm.DB) contents.Repository {
-	return &contentRepository{}
+	return &contentRepository{
+		conn: conn,
+	}
 }
 
 func (cr *contentRepository) GetAll() ([]contents.Domain, error) {

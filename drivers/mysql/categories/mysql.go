@@ -11,7 +11,9 @@ type categoryRepository struct {
 }
 
 func NewMySQLRepository(conn *gorm.DB) categories.Repository {
-	return &categoryRepository{}
+	return &categoryRepository{
+		conn: conn,
+	}
 }
 
 func (cr *categoryRepository) GetAll() ([]categories.Domain, error) {

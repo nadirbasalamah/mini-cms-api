@@ -3,6 +3,7 @@ package middlewares
 import (
 	"errors"
 	"net/http"
+	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 	echojwt "github.com/labstack/echo-jwt/v4"
@@ -15,7 +16,8 @@ type JWTCustomClaims struct {
 }
 
 type JWTConfig struct {
-	SecretKey string
+	SecretKey       string
+	ExpiresDuration int
 }
 
 func (jwtCfg *JWTConfig) Init() echojwt.Config {
@@ -25,6 +27,27 @@ func (jwtCfg *JWTConfig) Init() echojwt.Config {
 		},
 		SigningKey: []byte(jwtCfg.SecretKey),
 	}
+}
+
+func (jwtCfg *JWTConfig) GenerateToken(userID int) (string, error) {
+	expire := jwt.NewNumericDate(time.Now().Local().Add(time.Hour * time.Duration(int64(jwtCfg.ExpiresDuration))))
+
+	claims := &JWTCustomClaims{
+		ID: userID,
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: expire,
+		},
+	}
+
+	rawToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	token, err := rawToken.SignedString([]byte(jwtCfg.SecretKey))
+
+	if err != nil {
+		return "", err
+	}
+
+	return token, nil
 }
 
 func GetUser(c echo.Context) (*JWTCustomClaims, error) {

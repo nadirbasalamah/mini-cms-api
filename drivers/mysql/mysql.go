@@ -5,6 +5,7 @@ import (
 	"log"
 	"mini-cms-api/drivers/mysql/categories"
 	"mini-cms-api/drivers/mysql/contents"
+	"mini-cms-api/drivers/mysql/users"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -42,8 +43,7 @@ func (config *DBConfig) InitDB() *gorm.DB {
 }
 
 func MigrateDB(db *gorm.DB) {
-	//TODO: migrate user table
-	err := db.AutoMigrate(&categories.Category{}, &contents.Content{})
+	err := db.AutoMigrate(&categories.Category{}, &contents.Content{}, &users.User{})
 
 	if err != nil {
 		log.Fatalf("database migration failed: %v\n", err)
