@@ -11,6 +11,15 @@ REST API Application for managing contents. Written in Go with Echo Framework
 - Request validation: [Validator](https://github.com/go-playground/validator)
 - Application configuration: [Viper](https://github.com/spf13/viper)
 
+## Notes
+
+There are two branches in this repository:
+
+- `main`: REST API application with clean architecture.
+- `mvc`: REST API application with MVC architecture.
+
+> If `mvc` is chosen, make sure to checkout to the `mvc` branch with `git checkout mvc`
+
 ## How to Use
 
 1. Clone this repository.
