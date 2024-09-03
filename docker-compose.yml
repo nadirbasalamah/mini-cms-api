@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  api-service:
+    build: .
+    ports:
+      - 1323:1323
+    restart: on-failure
+    networks:
+      - my-network
+    depends_on:
+      - mariadb-service
+
+  mariadb-service:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306
+    volumes:
+      - C:\Users\ASUS\Documents\minicmsvolume:/var/lib/mysql
+      - C:\Users\ASUS\codes\mini-cms-api\mariadb\init.sql:/data/application/init.sql
+    command: --init-file /data/application/init.sql
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

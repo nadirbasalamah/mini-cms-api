@@ -41,3 +41,13 @@ CREATE DATABASE minicmsdb;
 ```sh
 go run main.go
 ```
+
+## Running with Docker
+
+The application can be run as a Docker container with this command. Make sure to adjust the `volume` setting inside `docker-compose.yml` file.
+
+Run the application.
+
+```sh
+docker compose up -d
+```
