@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mini-cms-api/utils"
+	"os"
 
 	_driverFactory "mini-cms-api/drivers"
 
@@ -24,11 +24,11 @@ import (
 
 func main() {
 	configDB := _dbDriver.DBConfig{
-		DB_USERNAME: utils.GetConfig("DB_USERNAME"),
-		DB_PASSWORD: utils.GetConfig("DB_PASSWORD"),
-		DB_HOST:     utils.GetConfig("DB_HOST"),
-		DB_PORT:     utils.GetConfig("DB_PORT"),
-		DB_NAME:     utils.GetConfig("DB_NAME"),
+		DB_USERNAME: os.Getenv("DB_USERNAME"),
+		DB_PASSWORD: os.Getenv("DB_PASSWORD"),
+		DB_HOST:     os.Getenv("DB_HOST"),
+		DB_PORT:     os.Getenv("DB_PORT"),
+		DB_NAME:     os.Getenv("DB_NAME"),
 	}
 
 	db := configDB.InitDB()
@@ -36,7 +36,7 @@ func main() {
 	_dbDriver.MigrateDB(db)
 
 	configJWT := _middlewares.JWTConfig{
-		SecretKey:       utils.GetConfig("JWT_SECRET_KEY"),
+		SecretKey:       os.Getenv("JWT_SECRET_KEY"),
 		ExpiresDuration: 1,
 	}
 
