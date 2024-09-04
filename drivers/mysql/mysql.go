@@ -31,7 +31,12 @@ func (config *DBConfig) InitDB() *gorm.DB {
 		config.DB_NAME,
 	)
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	pgConfig := postgres.New(postgres.Config{
+		DSN:                  dsn,
+		PreferSimpleProtocol: true,
+	})
+
+	db, err := gorm.Open(pgConfig, &gorm.Config{})
 
 	if err != nil {
 		log.Fatalf("error when connecting to the database: %s\n", err)
