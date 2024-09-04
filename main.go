@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	_driverFactory "mini-cms-api/drivers"
@@ -68,5 +69,7 @@ func main() {
 
 	routesInit.RegisterRoute(e)
 
-	e.Logger.Fatal(e.Start(":1323"))
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+
+	e.Logger.Fatal(e.Start(port))
 }
