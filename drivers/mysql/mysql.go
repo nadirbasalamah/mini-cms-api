@@ -7,7 +7,7 @@ import (
 	"mini-cms-api/drivers/mysql/contents"
 	"mini-cms-api/drivers/mysql/users"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -23,7 +23,7 @@ func (config *DBConfig) InitDB() *gorm.DB {
 	var err error
 
 	var dsn string = fmt.Sprintf(
-		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		"user=%s password=%s host=%s port=%s dbname=%s",
 		config.DB_USERNAME,
 		config.DB_PASSWORD,
 		config.DB_HOST,
@@ -31,7 +31,7 @@ func (config *DBConfig) InitDB() *gorm.DB {
 		config.DB_NAME,
 	)
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatalf("error when connecting to the database: %s\n", err)
