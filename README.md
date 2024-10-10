@@ -1,6 +1,6 @@
 # mini-cms-api
 
-REST API Application for managing contents. Written in Go with Echo Framework
+REST API Application for managing contents. Written in Go with Echo Framework.
 
 ## Tech Stack
 
@@ -13,10 +13,11 @@ REST API Application for managing contents. Written in Go with Echo Framework
 
 ## Notes
 
-There are two branches in this repository:
+There are three branches in this repository:
 
 - `main`: REST API application with clean architecture.
 - `mvc`: REST API application with MVC architecture.
+- `prod`: Deployed REST API application.
 
 > If `mvc` is chosen, make sure to checkout to the `mvc` branch with `git checkout mvc`
 
